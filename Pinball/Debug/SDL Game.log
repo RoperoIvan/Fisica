@@ -1,4 +1,18 @@
 ﻿  ModuleSceneIntro.cpp
 c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  SDL Game.vcxproj -> C:\Users\ivan_\Desktop\Physics2_class_4_handout\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\ivan_\Desktop\Physics2_class_4_handout\Debug\2D Physics - class 4.pdb (Partial PDB)
+  ModulePhysics.cpp
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(40): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(121): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(122): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(165): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(346): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(347): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ivan_\onedrive\documentos\github\fisica\pinball\modulephysics.cpp(353): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\cmath(113): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Generando código...
+  Compilando...
+  Application.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Generando código...
+  SDL Game.vcxproj -> C:\Users\ivan_\OneDrive\Documentos\GitHub\Fisica\Pinball\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\ivan_\OneDrive\Documentos\GitHub\Fisica\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)

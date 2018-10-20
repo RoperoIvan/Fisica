@@ -11,6 +11,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	circle = box = rick = NULL;
 	table = NULL;
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -24,7 +25,7 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	circle = App->textures->Load("pinball/wheel.png"); 
+	/*circle = App->textures->Load("pinball/wheel.png"); */
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
@@ -34,6 +35,17 @@ bool ModuleSceneIntro::Start()
 	tablerect.y = 369;
 	tablerect.h = 730;
 	tablerect.w = 442;
+
+	ballrect.x = 11;
+	ballrect.y = 427;
+	ballrect.h = 19;
+	ballrect.w = 20;
+
+	clickerrect.x = 9;
+	clickerrect.y = 565;
+	clickerrect.h = 56;
+	clickerrect.w = 54;
+
 	return ret;
 }
 
@@ -41,22 +53,24 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
-
+	App->textures->Unload(table);
 	return true;
 }
 
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	App->renderer->Blit(table, 0, 0, &tablerect);
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
 		circles.getLast()->data->listener = this;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
+		clicker.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 27));
+		
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
@@ -113,17 +127,17 @@ update_status ModuleSceneIntro::Update()
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
-		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
+		App->renderer->Blit(table, x, y, &ballrect, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
-	c = boxes.getFirst();
+	c = clicker.getFirst();
 
 	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
+		App->renderer->Blit(table, x, y, &clickerrect, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
@@ -136,7 +150,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
-	App->renderer->Blit(table, 0, 0, &tablerect);
+	
 
 	return UPDATE_CONTINUE;
 }

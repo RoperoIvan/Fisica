@@ -19,6 +19,7 @@ public:
 
 public:
 	p2List<PhysBody*> circles;
+	p2List<PhysBody*> clicker;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
@@ -29,4 +30,6 @@ public:
 	uint bonus_fx;
 
 	SDL_Rect tablerect;
+	SDL_Rect ballrect;
+	SDL_Rect clickerrect;
 };
