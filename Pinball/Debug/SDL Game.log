@@ -1,10 +1,2 @@
-﻿  ModulePhysics.cpp
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(40): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(41): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(250): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(251): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(294): warning C4018: '<': no coinciden signed/unsigned
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(475): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(476): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\modulephysics.cpp(482): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+﻿  ModuleSceneIntro.cpp
   SDL Game.vcxproj -> C:\Users\Isabel\Desktop\class vec3\Fisica\Pinball\Debug\2D Physics - class 4.exe

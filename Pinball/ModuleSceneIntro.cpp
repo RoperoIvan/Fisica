@@ -69,7 +69,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		clicker.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 27));
+		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 20,40));
 		
 	}
 
