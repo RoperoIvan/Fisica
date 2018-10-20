@@ -29,7 +29,15 @@ public:
 	SDL_Texture* table;
 	uint bonus_fx;
 
+	PhysBody* ball;
+	PhysBody* circlepoint;
+	PhysBody* bouncer;
+
+
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;
 	SDL_Rect clickerrect;
+	SDL_Rect bluecircle;
+	SDL_Rect orangecircle;
+	iPoint ballpos, circlepos, bouncerpos;
 };

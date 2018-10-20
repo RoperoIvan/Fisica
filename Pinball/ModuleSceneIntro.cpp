@@ -45,6 +45,30 @@ bool ModuleSceneIntro::Start()
 	clickerrect.y = 565;
 	clickerrect.h = 56;
 	clickerrect.w = 54;
+	bluecircle.x = 9;
+	bluecircle.y = 519;
+	bluecircle.h = 37;
+	bluecircle.w = 38;
+
+	orangecircle.x = 22;
+	orangecircle.y = 630;
+	orangecircle.h = 28;
+	orangecircle.w = 29;
+
+	ballpos.x = SCREEN_WIDTH / 2;
+	ballpos.y = SCREEN_HEIGHT / 2 - 200;
+	circlepos.x = SCREEN_WIDTH / 2;
+	circlepos.y = SCREEN_HEIGHT / 2;
+	bouncerpos.x = SCREEN_WIDTH / 2;
+	bouncerpos.y = SCREEN_HEIGHT / 2 - 100;
+
+	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+
+	/*circlepoint = App->physics->CreateCircleStatic(circlepos.x, circlepos.y, 18);
+	circlepoint->body->GetFixtureList()->SetRestitution(1.5f);*/
+	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
+	bouncer->body->GetFixtureList()->SetDensity(10.0f);
+	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
 
 	return ret;
 }
@@ -81,6 +105,24 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
+	
+	ball->GetPosition(ballpos.x, ballpos.y);
+	App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
+	/*circlepoint->GetPosition(circlepos.x, circlepos.y);
+	if (!col)
+	{
+	App->renderer->Blit(table, circlepos.x, circlepos.y, &bluecircle);
+	}
+	else
+	{
+	App->renderer->Blit(table, circlepos.x, circlepos.y, &orangecircle);
+	}
+	*/
+	bouncer->GetPosition(bouncerpos.x, bouncerpos.y);
+	App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &clickerrect);
+	
+	
+	
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
