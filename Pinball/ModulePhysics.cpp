@@ -36,22 +36,91 @@ bool ModulePhysics::Start()
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = 54;
+	int x = -SCREEN_WIDTH/4.62f;
+	int y = -SCREEN_HEIGHT / 2.08f;
+
+	// Pivot 0, 0
+	int wall[98] = {
+		649, 1097,
+		648, 551,
+		642, 529,
+		626, 503,
+		610, 487,
+		603, 482,
+		604, 465,
+		595, 454,
+		537, 440,
+		528, 449,
+		508, 492,
+		369, 490,
+		344, 443,
+		334, 440,
+		280, 455,
+		275, 461,
+		274, 474,
+		274, 481,
+		254, 502,
+		234, 537,
+		228, 563,
+		230, 595,
+		236, 621,
+		243, 658,
+		269, 747,
+		260, 752,
+		248, 789,
+		236, 824,
+		237, 847,
+		265, 920,
+		264, 1041,
+		327, 1097,
+		325, 1162,
+		616, 1157,
+		618, 1098,
+		613, 868,
+		611, 672,
+		591, 627,
+		597, 619,
+		603, 611,
+		601, 598,
+		600, 591,
+		622, 614,
+		622, 869,
+		622, 979,
+		649, 979,
+		649, 985,
+		622, 984,
+		623, 1096
+	};
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
-	b2Body* big_ball = world->CreateBody(&body);
+	b2Body* b = world->CreateBody(&body);
 
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[98 / 2];
+
+	for (uint i = 0; i < 98 / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(wall[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(wall[i * 2 + 1]);
+	}
+
+	shape.CreateLoop(p, 98 / 2);
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
+
+	b->CreateFixture(&fixture);
+
+	delete p;
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 0;
+
 
 	return true;
 }
