@@ -5,6 +5,7 @@
 #include "ModulePhysics.h"
 #include "p2Point.h"
 #include "math.h"
+#include "ModuleSceneIntro.h"
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -92,35 +93,94 @@ bool ModulePhysics::Start()
 		623, 1096
 	};
 
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+	int internal_line[64] = {
+		501, 828,
+		500, 777,
+		495, 745,
+		486, 707,
+		473, 684,
+		454, 671,
+		433, 661,
+		406, 657,
+		384, 660,
+		358, 668,
+		333, 689,
+		327, 700,
+		325, 715,
+		327, 733,
+		330, 747,
+		343, 772,
+		336, 756,
+		330, 740,
+		327, 722,
+		329, 703,
+		340, 685,
+		354, 674,
+		370, 665,
+		395, 660,
+		415, 659,
+		440, 665,
+		460, 676,
+		476, 692,
+		481, 702,
+		489, 725,
+		496, 760,
+		499, 790
+	};
 
-	b2Body* b = world->CreateBody(&body);
-
-	b2ChainShape shape;
-	b2Vec2* p = new b2Vec2[98 / 2];
-
-	for (uint i = 0; i < 98 / 2; ++i)
-	{
-		p[i].x = PIXEL_TO_METERS(wall[i * 2 + 0]);
-		p[i].y = PIXEL_TO_METERS(wall[i * 2 + 1]);
-	}
-
-	shape.CreateLoop(p, 98 / 2);
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-
-	b->CreateFixture(&fixture);
-
-	delete p;
-
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	b->SetUserData(pbody);
-	pbody->width = pbody->height = 0;
-
+	int external_line[96] = {
+		315, 787,
+		307, 768,
+		303, 748,
+		302, 726,
+		304, 707,
+		311, 690,
+		328, 668,
+		338, 660,
+		354, 651,
+		365, 647,
+		376, 644,
+		409, 640,
+		423, 642,
+		437, 643,
+		451, 649,
+		462, 654,
+		479, 666,
+		495, 683,
+		504, 698,
+		511, 714,
+		515, 730,
+		517, 755,
+		518, 782,
+		520, 825,
+		520, 789,
+		519, 763,
+		517, 738,
+		515, 720,
+		509, 705,
+		500, 685,
+		486, 670,
+		469, 656,
+		457, 649,
+		444, 644,
+		430, 640,
+		416, 639,
+		400, 639,
+		384, 641,
+		370, 643,
+		358, 647,
+		343, 654,
+		321, 674,
+		312, 685,
+		305, 700,
+		301, 712,
+		299, 739,
+		302, 761,
+		310, 782
+	};
+	App->scene_intro->ricks.add(CreateChain(x, y, wall, 98));
+	App->scene_intro->ricks.add(CreateChain(x, y, internal_line, 64));
+	App->scene_intro->ricks.add(CreateChain(x, y, external_line, 96));
 
 	return true;
 }
@@ -223,7 +283,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
