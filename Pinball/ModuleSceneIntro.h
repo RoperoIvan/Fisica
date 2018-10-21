@@ -32,24 +32,43 @@ public:
 	PhysBody* ball;
 	PhysBody* circlepoint;
 	PhysBody* bouncer;
+	PhysBody* bouncermedium;
+	PhysBody* bouncermedium2;
+	PhysBody* bouncermedium3;
+	PhysBody* bouncerlittle;
 	PhysBody* sensor;
 	PhysBody* leftBounce;
 	PhysBody* rightBounce;
 	PhysBody* topBounce;
 	PhysBody* sensorhole;
 	PhysBody* sensorhole2;
-
+	PhysBody* sensorlittle;
+	PhysBody* sensor2;
+	PhysBody* sensor3;
 
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;
 	SDL_Rect clickerrect;
+	SDL_Rect clickerrectmedium;
+	SDL_Rect clickerrectlittle;
+	SDL_Rect sensorlittlerect;
 	SDL_Rect bluecircle;
 	SDL_Rect orangecircle;
 	SDL_Rect brightclicker;
+	SDL_Rect brightclickermedium;
+	SDL_Rect brightclickerlittle;
+	SDL_Rect sensorlittleor;
 
-	iPoint ballpos, circlepos, bouncerpos,bounpos,holepos, holepos2;
+	iPoint ballpos, circlepos, bouncerpos,bounpos,holepos, holepos2, circlepos2, circlepos3, circlepos4,bouncermpos, bouncermpos3, bouncermpos2, bouncerlpos;
 	bool collision = false;
 	bool collision2 = false;
+	bool collision3 = false;
+	bool collision4 = false;
+	bool collision5 = false;
+	bool collision6 = false;
+	bool collision7 = false;
+	bool collision8 = false;
+	bool collision9 = false;
 	bool tp = false;
 	bool tp2 = false;
 	int lives = 0;
