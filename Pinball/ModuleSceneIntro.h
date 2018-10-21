@@ -36,6 +36,8 @@ public:
 	PhysBody* leftBounce;
 	PhysBody* rightBounce;
 	PhysBody* topBounce;
+	PhysBody* sensorhole;
+	PhysBody* sensorhole2;
 
 
 	SDL_Rect tablerect;
@@ -45,9 +47,9 @@ public:
 	SDL_Rect orangecircle;
 	SDL_Rect brightclicker;
 
-	iPoint ballpos, circlepos, bouncerpos,bounpos;
-	int counter = 0;
-	int counter2 = 0;
+	iPoint ballpos, circlepos, bouncerpos,bounpos,holepos, holepos2;
 	bool collision = false;
 	bool collision2 = false;
+	bool tp = false;
+	bool tp2 = false;
 };

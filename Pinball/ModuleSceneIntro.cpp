@@ -88,22 +88,29 @@ bool ModuleSceneIntro::Start()
 		562, 868
 	};
 
-	ballpos.x = SCREEN_WIDTH / 2;
-	ballpos.y = SCREEN_HEIGHT / 2 - 200;
-	circlepos.x = SCREEN_WIDTH / 2;
-	circlepos.y = SCREEN_HEIGHT / 2;
-	bouncerpos.x = SCREEN_WIDTH / 2;
-	bouncerpos.y = SCREEN_HEIGHT / 2 - 100;
+	ballpos.x = 335;
+	ballpos.y = 140;
+	circlepos.x = 335;
+	circlepos.y = 352;
+	bouncerpos.x = 145;
+	bouncerpos.y = 350;
 	bounpos.x = -SCREEN_WIDTH / 2.0f;
 	bounpos.y = -SCREEN_HEIGHT / 2.08f;
+	holepos.x = 80;
+	holepos.y = 175;
+	holepos2.x = 335;
+	holepos2.y = 245;
+
 
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 
-	/*bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
+	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
 	bouncer->body->GetFixtureList()->SetDensity(10.0f);
-	bouncer->body->GetFixtureList()->SetRestitution(1.5f);*/
+	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
 
 	sensor = App->physics->CreateCircleSensor(circlepos.x, circlepos.y, 18);
+	sensorhole = App->physics->CreateCircleSensor(holepos.x, holepos.y, 15);
+	sensorhole2 = App->physics->CreateCircleSensor(holepos2.x, holepos2.y, 15);
 
 	rightBounce = App->physics->CreateChain(bounpos.x, bounpos.y, right_bounce, 10);
 	leftBounce = App->physics->CreateChain(bounpos.x, bounpos.y, left_bounce, 14);
@@ -127,6 +134,24 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(table, 0, 0, &tablerect);
+
+	if (tp)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 80;
+		ballpos.y = 480;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		tp = false;
+	}
+	if (tp2)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 337;
+		ballpos.y = 562;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		tp2 = false;
+	}
+
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8));
@@ -215,32 +240,23 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{	
 		if (bodyA == ball && bodyB == bouncer || bodyA == bouncer && bodyB == ball)
 		{
-			counter++;
-			if (counter == 1)
-			{
-				collision = true;
-			}
-			if (counter == 2)
-			{
-				collision = false;
-				counter = 0;
-			}
+			collision = !collision;
 			App->audio->PlayFx(bonus_fx);
 		}
 
 		if (bodyA == ball && bodyB == sensor || bodyA == sensor && bodyB == ball)
 		{
-			counter2++;
-			if (counter2 == 1)
-			{
-				collision2 = true;
-			}
-			if (counter2 == 2)
-			{
-				collision2 = false;
-			}
+			collision2 = !collision2;
 		}
-		
+
+		if (bodyA == ball && bodyB == sensorhole || bodyA == sensorhole && bodyB == ball)
+		{
+			tp = true;
+		}
+		if (bodyA == ball && bodyB == sensorhole2 || bodyA == sensorhole2 && bodyB == ball)
+		{
+			tp2 = true;
+		}	
 	}
 	
 }
