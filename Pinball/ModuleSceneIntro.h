@@ -21,7 +21,7 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> clicker;
 	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
+	p2List<PhysBody*> chains;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
@@ -33,6 +33,10 @@ public:
 	PhysBody* circlepoint;
 	PhysBody* bouncer;
 	PhysBody* sensor;
+	PhysBody* leftBounce;
+	PhysBody* rightBounce;
+	PhysBody* topBounce;
+
 
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;
@@ -41,7 +45,7 @@ public:
 	SDL_Rect orangecircle;
 	SDL_Rect brightclicker;
 
-	iPoint ballpos, circlepos, bouncerpos;
+	iPoint ballpos, circlepos, bouncerpos,bounpos;
 	int counter = 0;
 	int counter2 = 0;
 	bool collision = false;

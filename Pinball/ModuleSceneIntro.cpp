@@ -61,12 +61,41 @@ bool ModuleSceneIntro::Start()
 	orangecircle.h = 35;
 	orangecircle.w = 37;
 
+	int right_bounce[10] = {
+		547, 1048,
+		587, 974,
+		588, 957,
+		581, 946,
+		524, 1048
+	};
+
+	int left_bounce[14] = {
+		365, 1046,
+		310, 946,
+		303, 957,
+		303, 975,
+		349, 1055,
+		357, 1056,
+		363, 1052
+	};
+
+	int top_bounce[12] = {
+		566, 872,
+		599, 870,
+		610, 862,
+		619, 836,
+		614, 832,
+		562, 868
+	};
+
 	ballpos.x = SCREEN_WIDTH / 2;
 	ballpos.y = SCREEN_HEIGHT / 2 - 200;
 	circlepos.x = SCREEN_WIDTH / 2;
 	circlepos.y = SCREEN_HEIGHT / 2;
 	bouncerpos.x = SCREEN_WIDTH / 2;
 	bouncerpos.y = SCREEN_HEIGHT / 2 - 100;
+	bounpos.x = -SCREEN_WIDTH / 2.0f;
+	bounpos.y = -SCREEN_HEIGHT / 2.08f;
 
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 
@@ -76,6 +105,13 @@ bool ModuleSceneIntro::Start()
 
 	sensor = App->physics->CreateCircleSensor(circlepos.x, circlepos.y, 18);
 
+	rightBounce = App->physics->CreateChain(bounpos.x, bounpos.y, right_bounce, 10);
+	leftBounce = App->physics->CreateChain(bounpos.x, bounpos.y, left_bounce, 14);
+	topBounce = App->physics->CreateChain(bounpos.x, bounpos.y, top_bounce, 12);
+
+	rightBounce->body->GetFixtureList()->SetRestitution(1.5f);
+	leftBounce->body->GetFixtureList()->SetRestitution(1.5f);
+	topBounce->body->GetFixtureList()->SetRestitution(1.5f);
 	return ret;
 }
 
