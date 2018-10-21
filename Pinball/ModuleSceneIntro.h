@@ -43,5 +43,7 @@ public:
 
 	iPoint ballpos, circlepos, bouncerpos;
 	int counter = 0;
+	int counter2 = 0;
 	bool collision = false;
+	bool collision2 = false;
 };

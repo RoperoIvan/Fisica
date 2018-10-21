@@ -56,10 +56,10 @@ bool ModuleSceneIntro::Start()
 	bluecircle.h = 37;
 	bluecircle.w = 38;
 
-	orangecircle.x = 22;
-	orangecircle.y = 630;
-	orangecircle.h = 28;
-	orangecircle.w = 29;
+	orangecircle.x = 68;
+	orangecircle.y = 520;
+	orangecircle.h = 35;
+	orangecircle.w = 37;
 
 	ballpos.x = SCREEN_WIDTH / 2;
 	ballpos.y = SCREEN_HEIGHT / 2 - 200;
@@ -70,13 +70,11 @@ bool ModuleSceneIntro::Start()
 
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 
-	/*circlepoint = App->physics->CreateCircleStatic(circlepos.x, circlepos.y, 18);
-	circlepoint->body->GetFixtureList()->SetRestitution(1.5f);*/
-	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
+	/*bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
 	bouncer->body->GetFixtureList()->SetDensity(10.0f);
-	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
+	bouncer->body->GetFixtureList()->SetRestitution(1.5f);*/
 
-	sensor = App->physics->CreateCircleSensor(bouncerpos.x, bouncerpos.y, 27);
+	sensor = App->physics->CreateCircleSensor(circlepos.x, circlepos.y, 18);
 
 	return ret;
 }
@@ -117,17 +115,18 @@ update_status ModuleSceneIntro::Update()
 	ball->GetPosition(ballpos.x, ballpos.y);
 	ball->listener = this;
 	App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
-	/*circlepoint->GetPosition(circlepos.x, circlepos.y);
-	if (!col)
+	
+	sensor->GetPosition(circlepos.x, circlepos.y);
+	if (!collision2)
 	{
-	App->renderer->Blit(table, circlepos.x, circlepos.y, &bluecircle);
+		App->renderer->Blit(table, circlepos.x, circlepos.y, &bluecircle);
 	}
-	else
+	else if (collision2)
 	{
-	App->renderer->Blit(table, circlepos.x, circlepos.y, &orangecircle);
+		App->renderer->Blit(table, circlepos.x, circlepos.y, &orangecircle);
 	}
-	*/
-	bouncer->GetPosition(bouncerpos.x, bouncerpos.y);
+
+	/*bouncer->GetPosition(bouncerpos.x, bouncerpos.y);
 	if (!collision)
 	{
 		App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &clickerrect);
@@ -135,7 +134,7 @@ update_status ModuleSceneIntro::Update()
 	else if (collision)
 	{
 		App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &brightclicker);
-	}
+	}*/
 	
 	
 	
@@ -191,6 +190,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				counter = 0;
 			}
 			App->audio->PlayFx(bonus_fx);
+		}
+
+		if (bodyA == ball && bodyB == sensor || bodyA == sensor && bodyB == ball)
+		{
+			counter2++;
+			if (counter2 == 1)
+			{
+				collision2 = true;
+			}
+			if (counter2 == 2)
+			{
+				collision2 = false;
+			}
 		}
 		
 	}
