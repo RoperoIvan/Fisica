@@ -32,12 +32,16 @@ public:
 	PhysBody* ball;
 	PhysBody* circlepoint;
 	PhysBody* bouncer;
-
+	PhysBody* sensor;
 
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;
 	SDL_Rect clickerrect;
 	SDL_Rect bluecircle;
 	SDL_Rect orangecircle;
+	SDL_Rect brightclicker;
+
 	iPoint ballpos, circlepos, bouncerpos;
+	int counter = 0;
+	bool collision = false;
 };

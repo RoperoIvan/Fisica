@@ -45,6 +45,12 @@ bool ModuleSceneIntro::Start()
 	clickerrect.y = 565;
 	clickerrect.h = 56;
 	clickerrect.w = 54;
+
+	brightclicker.x = 9;
+	brightclicker.y = 833;
+	brightclicker.h = 54;
+	brightclicker.w = 56;
+
 	bluecircle.x = 9;
 	bluecircle.y = 519;
 	bluecircle.h = 37;
@@ -70,6 +76,8 @@ bool ModuleSceneIntro::Start()
 	bouncer->body->GetFixtureList()->SetDensity(10.0f);
 	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
 
+	sensor = App->physics->CreateCircleSensor(bouncerpos.x, bouncerpos.y, 27);
+
 	return ret;
 }
 
@@ -91,12 +99,12 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->listener = this;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	/*if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 20,40));
 		
 	}
-
+*/
 
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -107,6 +115,7 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	
 	ball->GetPosition(ballpos.x, ballpos.y);
+	ball->listener = this;
 	App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
 	/*circlepoint->GetPosition(circlepos.x, circlepos.y);
 	if (!col)
@@ -119,7 +128,15 @@ update_status ModuleSceneIntro::Update()
 	}
 	*/
 	bouncer->GetPosition(bouncerpos.x, bouncerpos.y);
-	App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &clickerrect);
+	if (!collision)
+	{
+		App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &clickerrect);
+	}
+	else if (collision)
+	{
+		App->renderer->Blit(table, bouncerpos.x, bouncerpos.y, &brightclicker);
+	}
+	
 	
 	
 	
@@ -133,7 +150,7 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 
-	c = clicker.getFirst();
+	/*c = clicker.getFirst();
 
 	while(c != NULL)
 	{
@@ -151,7 +168,7 @@ update_status ModuleSceneIntro::Update()
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
-	}
+	}*/
 	
 
 	return UPDATE_CONTINUE;
@@ -159,5 +176,23 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	/*App->audio->PlayFx(bonus_fx);*/
+	if (bodyA != NULL && bodyB != NULL) 
+	{	
+		if (bodyA == ball && bodyB == bouncer || bodyA == bouncer && bodyB == ball)
+		{
+			counter++;
+			if (counter == 1)
+			{
+				collision = true;
+			}
+			if (counter == 2)
+			{
+				collision = false;
+				counter = 0;
+			}
+			App->audio->PlayFx(bonus_fx);
+		}
+		
+	}
+	
 }
