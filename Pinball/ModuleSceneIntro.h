@@ -52,4 +52,5 @@ public:
 	bool collision2 = false;
 	bool tp = false;
 	bool tp2 = false;
+	int lives = 0;
 };

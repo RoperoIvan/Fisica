@@ -135,6 +135,26 @@ update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(table, 0, 0, &tablerect);
 
+	if (ballpos.y >= 768 && lives < 4)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 300;
+		ballpos.y = 600;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		lives++;
+		LOG("%i", lives);
+	}
+
+	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		/*ballpos.x = 422;
+		ballpos.y = 600;*/
+		ballpos.x = 335;
+		ballpos.y = 140;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		lives = 0;
+
+	}
 	if (tp)
 	{
 		App->physics->world->DestroyBody(ball->body);
@@ -172,10 +192,13 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
+	if (lives <= 4)
+	{
+		ball->GetPosition(ballpos.x, ballpos.y);
+		ball->listener = this;
+		App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
+	}
 	
-	ball->GetPosition(ballpos.x, ballpos.y);
-	ball->listener = this;
-	App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
 	
 	sensor->GetPosition(circlepos.x, circlepos.y);
 	if (!collision2)
