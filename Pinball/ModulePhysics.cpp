@@ -37,7 +37,7 @@ bool ModulePhysics::Start()
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
-	int x = -SCREEN_WIDTH/4.62f;
+	int x = -SCREEN_WIDTH/2.0f;
 	int y = -SCREEN_HEIGHT / 2.08f;
 
 	// Pivot 0, 0
