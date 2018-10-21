@@ -149,6 +149,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		/*ballpos.x = 422;
 		ballpos.y = 600;*/
+		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 335;
 		ballpos.y = 140;
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
