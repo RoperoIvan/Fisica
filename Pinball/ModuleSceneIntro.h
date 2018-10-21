@@ -45,6 +45,9 @@ public:
 	PhysBody* sensorlittle;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
+	PhysBody* flipper;
+	PhysBody* rodona;
+	iPoint flipos;
 
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;

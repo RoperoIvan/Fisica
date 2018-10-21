@@ -144,7 +144,11 @@ bool ModuleSceneIntro::Start()
 	bouncermpos3.y = 531;
 	bouncerlpos.x = 63;
 	bouncerlpos.y = 529;
+	//flipos = { 153,173 };
 
+	//flipper = App->physics->BuildFlippers(flipos.x, flipos.y, 50, 30);
+	//flipper = App->physics->CreateRectangle(flipos.x, flipos.y, 50, 30);
+	//rodona = App->physics->CreateCircleStatic(flipos.x - 25, flipos.y - 15, 10);
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 
 	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
