@@ -380,6 +380,38 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 	return pbody;
 }
 
+PhysBody * ModulePhysics::CreateFlipper(int x, int y, int width, int height,bool right)
+{
+	PhysBody* flipper = CreateRectangle(x, y, width, height);
+	PhysBody* ancla = nullptr;
+	if(!right)
+		ancla = CreateCircleStatic(x - width / 2, y - height / 2, 1);
+	else
+		ancla = CreateCircleStatic(x + width / 2, y - height / 2, 1);
+
+
+	b2RevoluteJointDef jointDef;
+	jointDef.Initialize(ancla->body,flipper->body, ancla->body->GetWorldCenter());
+	/*jointDef.localAnchorA = {(float) width / 2, (float) height / 2 };
+	jointDef.localAnchorB = { 0, 0 };*/
+	jointDef.enableLimit = true;
+	if (right)
+	{
+		jointDef.lowerAngle = -0.05f * b2_pi; // -90 degrees
+		jointDef.upperAngle = 0.25f * b2_pi; // 45 degrees
+	}
+	else
+	{
+		jointDef.lowerAngle = -0.05f * b2_pi; // -90 degrees
+		jointDef.upperAngle = -0.25f * b2_pi; // 45 degrees
+	}
+	jointDef.collideConnected = false;
+
+	revolute_joint = (b2RevoluteJoint *)world->CreateJoint(&jointDef);
+
+	return flipper;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {

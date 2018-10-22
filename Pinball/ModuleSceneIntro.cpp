@@ -144,11 +144,12 @@ bool ModuleSceneIntro::Start()
 	bouncermpos3.y = 531;
 	bouncerlpos.x = 63;
 	bouncerlpos.y = 529;
-	//flipos = { 153,173 };
+	flipRpos = { 271,695 };
+	flipLpos = { 175,695 };
 
-	//flipper = App->physics->BuildFlippers(flipos.x, flipos.y, 50, 30);
-	//flipper = App->physics->CreateRectangle(flipos.x, flipos.y, 50, 30);
-	//rodona = App->physics->CreateCircleStatic(flipos.x - 25, flipos.y - 15, 10);
+	
+	flipperL = App->physics->CreateFlipper(flipLpos.x, flipLpos.y, 60, 30, false);
+	flipperR = App->physics->CreateFlipper(flipRpos.x, flipRpos.y, 60, 30,true); 
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 
 	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
@@ -267,6 +268,16 @@ update_status ModuleSceneIntro::Update()
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8));
 		circles.getLast()->data->listener = this;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		flipperR->body->ApplyForceToCenter({ -100,-100 }, true);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		flipperL->body->ApplyForceToCenter({ 100,100 }, true);
 	}
 
 	/*if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
