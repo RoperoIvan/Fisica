@@ -74,5 +74,9 @@ public:
 	bool collision9 = false;
 	bool tp = false;
 	bool tp2 = false;
+	int combo = 0;
+	int combo2 = 0;
+	int highscore = 0;
 	int lives = 0;
+	int points = 0;
 };

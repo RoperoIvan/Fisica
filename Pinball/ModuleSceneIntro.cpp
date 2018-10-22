@@ -215,12 +215,16 @@ update_status ModuleSceneIntro::Update()
 	{
 		/*ballpos.x = 422;
 		ballpos.y = 600;*/
+		if (points > highscore)
+		{
+			highscore = points;
+		}
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 335;
 		ballpos.y = 140;
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 		lives = 0;
-
+		points = 0;
 	}
 	if (tp)
 	{
@@ -237,6 +241,26 @@ update_status ModuleSceneIntro::Update()
 		ballpos.y = 562;
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
 		tp2 = false;
+	}
+
+	if (combo == 4)
+	{
+		points += 40;
+		combo = 0;
+		collision2 = false;
+		collision3 = false;
+		collision4 = false;
+		collision5 = false;
+	}
+	if (combo2 == 5)
+	{
+		points += 50;
+		combo2 = 0;
+		collision = false;
+		collision6 = false;
+		collision7 = false;
+		collision8 = false;
+		collision9 = false;
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -400,11 +424,29 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			collision = !collision;
 			App->audio->PlayFx(bonus_fx);
+			if (collision == true)
+			{
+				combo2++;
+			}
+			else if (collision == false)
+			{
+				combo2--;
+			}
+			points += 10;
 		}
 
 		if (bodyA == ball && bodyB == sensor || bodyA == sensor && bodyB == ball)
 		{
 			collision2 = !collision2;
+			if (collision2 == true)
+			{
+				combo++;
+			}
+			else if (collision2 == false)
+			{
+				combo--;
+			}
+			points += 10;
 		}
 
 		if (bodyA == ball && bodyB == sensorhole || bodyA == sensorhole && bodyB == ball)
@@ -418,30 +460,93 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == sensorlittle || bodyA == sensorlittle && bodyB == ball)
 		{
 			collision3 = !collision3;
+			if (collision3 == true)
+			{
+				combo++;
+			}
+			else if (collision3 == false)
+			{
+				combo--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == sensor2 || bodyA == sensor2 && bodyB == ball)
 		{
 			collision4 = !collision4;
+			if (collision4 == true)
+			{
+				combo++;
+			}
+			else if (collision4 == false)
+			{
+				combo--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == sensor3 || bodyA == sensor3 && bodyB == ball)
 		{
 			collision5 = !collision5;
+			if (collision5 == true)
+			{
+				combo++;
+			}
+			else if (collision5 == false)
+			{
+				combo--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == bouncermedium || bodyA == bouncermedium && bodyB == ball)
 		{
 			collision6 = !collision6;
+			if (collision6 == true)
+			{
+				combo2++;
+			}
+			else if (collision6 == false)
+			{
+				combo2--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == bouncermedium2 || bodyA == bouncermedium2 && bodyB == ball)
 		{
 			collision7 = !collision7;
+			if (collision7 == true)
+			{
+				combo2++;
+			}
+			else if (collision7 == false)
+			{
+				combo2--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == bouncermedium3 || bodyA == bouncermedium3 && bodyB == ball)
 		{
 			collision8 = !collision8;
+			if (collision8 == true)
+			{
+				combo2++;
+			}
+			else if (collision8 == false)
+			{
+				combo2--;
+			}
+			points += 10;
 		}
 		if (bodyA == ball && bodyB == bouncerlittle || bodyA == bouncerlittle && bodyB == ball)
 		{
 			collision9 = !collision9;
+			if (collision9 == true)
+			{
+				combo2++;
+			}
+			else if (collision9 == false)
+			{
+				combo2--;
+			}
+			points += 10;
 		}
 	}
 	
