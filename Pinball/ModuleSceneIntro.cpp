@@ -272,12 +272,12 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		flipperR->body->ApplyForceToCenter({ -100,-100 }, true);
+		flipperR->body->ApplyForceToCenter({ 0,-100 }, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		flipperL->body->ApplyForceToCenter({ 100,100 }, true);
+		flipperL->body->ApplyForceToCenter({ 0,-100 }, true);
 	}
 
 	/*if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)

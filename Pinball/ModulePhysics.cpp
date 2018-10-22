@@ -402,8 +402,8 @@ PhysBody * ModulePhysics::CreateFlipper(int x, int y, int width, int height,bool
 	}
 	else
 	{
-		jointDef.lowerAngle = -0.05f * b2_pi; // -90 degrees
-		jointDef.upperAngle = -0.25f * b2_pi; // 45 degrees
+		jointDef.lowerAngle = -0.25f * b2_pi; // -90 degrees
+		jointDef.upperAngle = 0.05f * b2_pi; // 45 degrees
 	}
 	jointDef.collideConnected = false;
 
