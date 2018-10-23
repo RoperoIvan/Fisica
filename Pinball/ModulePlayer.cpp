@@ -4,6 +4,8 @@
 #include "ModulePhysics.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleRender.h"
+#include "ModuleSceneIntro.h"
 
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -11,20 +13,29 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 }
 
 ModulePlayer::~ModulePlayer()
-{}
+{
+}
 
 // Load assets
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	flipRpos = { 289,713 };
-	flipLpos = { 175,713 };
+
+	idle.PushBack({ 21,665,21,60 });
+
+	dockanim.PushBack({ 20,764,20,60 });
+	dockanim.PushBack({ 78,708,20,70 });
+	dockanim.loop = false;
+	dockanim.speed = 0.05f;
+
+	flipRpos = { 269,697 };
+	flipLpos = { 178,697 };
 	dockpos = { 415, 650 };
 
 	dock = App->physics->CreateDock(dockpos.x, dockpos.y, 21, 60);
 
-	flipperL = App->physics->CreateFlipper(flipLpos.x, flipLpos.y, 78, 48, false);
-	flipperR = App->physics->CreateFlipper(flipRpos.x, flipRpos.y, 78, 48, true);
+	flipperL = App->physics->CreateFlipper(flipLpos.x, flipLpos.y, 68, 33, false);
+	flipperR = App->physics->CreateFlipper(flipRpos.x, flipRpos.y, 68, 33, true);
 
 	return true;
 }
@@ -40,7 +51,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
+	current_animation = &idle;
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		flipperR->body->ApplyForceToCenter({ 0,-100 }, true);
@@ -50,11 +61,18 @@ update_status ModulePlayer::Update()
 	{
 		flipperL->body->ApplyForceToCenter({ 0,-100 }, true);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		current_animation = &dockanim;
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
 	{
 		dock->body->ApplyForceToCenter({ 0,100 }, true);
+		dockanim.Reset();
 	}
+
+	App->renderer->Blit(App->scene_intro->table, dockpos.x - 10, dockpos.y - 30, &(current_animation->GetCurrentFrame()));
 
 	return UPDATE_CONTINUE;
 }

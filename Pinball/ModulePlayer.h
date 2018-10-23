@@ -2,7 +2,7 @@
 #include "Module.h"
 #include "p2Point.h"
 #include "Globals.h"
-
+#include "Animation.h"
 
 
 class ModulePlayer : public Module
@@ -16,6 +16,12 @@ public:
 	bool CleanUp();
 
 public:
+
+	Animation dockanim;
+	Animation idle;
+	Animation* current_animation = nullptr;
+
+	SDL_Rect dockrect;
 
 	PhysBody * flipperR;
 	PhysBody* flipperL;
