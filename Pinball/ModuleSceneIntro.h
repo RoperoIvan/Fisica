@@ -45,9 +45,7 @@ public:
 	PhysBody* sensorlittle;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
-	PhysBody* flipperR;
-	PhysBody* flipperL;
-
+	
 
 
 	SDL_Rect tablerect;
@@ -64,7 +62,7 @@ public:
 	SDL_Rect sensorlittleor;
 
 	iPoint ballpos, circlepos, bouncerpos, bounpos, holepos, holepos2, circlepos2, circlepos3, circlepos4;
-	iPoint bouncermpos, bouncermpos3, bouncermpos2, bouncerlpos, flipRpos, flipLpos;
+	iPoint bouncermpos, bouncermpos3, bouncermpos2, bouncerlpos;
 
 	bool collision = false;
 	bool collision2 = false;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
 #include "p2Point.h"
+#include "Globals.h"
 
 
 
@@ -16,5 +16,11 @@ public:
 	bool CleanUp();
 
 public:
+
+	PhysBody * flipperR;
+	PhysBody* flipperL;
+	PhysBody* dock;
+
+	iPoint flipRpos, flipLpos, dockpos;
 
 };
