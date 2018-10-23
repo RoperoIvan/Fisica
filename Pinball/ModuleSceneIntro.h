@@ -48,7 +48,7 @@ public:
 	PhysBody* flipperR;
 	PhysBody* flipperL;
 
-	
+
 
 	SDL_Rect tablerect;
 	SDL_Rect ballrect;
@@ -65,7 +65,7 @@ public:
 
 	iPoint ballpos, circlepos, bouncerpos, bounpos, holepos, holepos2, circlepos2, circlepos3, circlepos4;
 	iPoint bouncermpos, bouncermpos3, bouncermpos2, bouncerlpos, flipRpos, flipLpos;
-	
+
 	bool collision = false;
 	bool collision2 = false;
 	bool collision3 = false;
@@ -82,4 +82,8 @@ public:
 	int highscore = 0;
 	int lives = 0;
 	int points = 0;
+	int score;
+	char text[10];
+	char text2[10];
+	int chances;
 };

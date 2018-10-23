@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleFonts.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -30,6 +31,8 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	table = App->textures->Load("pinball/Texturas2.png");
+	score = App->fonts->Load("pinball/numbers.png","0123456789", 1);
+	
 
 	tablerect.x = 222;
 	tablerect.y = 369;
@@ -194,6 +197,7 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
 	App->textures->Unload(table);
+	App->fonts->UnLoad(score);
 	return true;
 }
 
@@ -423,6 +427,12 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}*/
 	
+	
+	sprintf_s(text, 10, "%7d", points);
+	App->fonts->BlitText(135, 35, score, text);
+
+	sprintf_s(text2, 10, "%7d", lives);
+	App->fonts->BlitText(300,35, score, text2);
 
 	return UPDATE_CONTINUE;
 }
