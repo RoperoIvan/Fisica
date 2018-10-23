@@ -60,6 +60,8 @@ public:
 	SDL_Rect brightclickermedium;
 	SDL_Rect brightclickerlittle;
 	SDL_Rect sensorlittleor;
+	SDL_Rect flipperLrect;
+	SDL_Rect flipperRrect;
 
 	iPoint ballpos, circlepos, bouncerpos, bounpos, holepos, holepos2, circlepos2, circlepos3, circlepos4;
 	iPoint bouncermpos, bouncermpos3, bouncermpos2, bouncerlpos;

@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -93,6 +94,17 @@ bool ModuleSceneIntro::Start()
 	orangecircle.y = 520;
 	orangecircle.h = 35;
 	orangecircle.w = 37;
+
+
+	flipperLrect.x = 24;
+	flipperLrect.y = 473;
+	flipperLrect.h = 33;
+	flipperLrect.w = 68;
+
+	flipperRrect.x = 113;
+	flipperRrect.y = 475;
+	flipperRrect.h = 33;
+	flipperRrect.w = 68;
 
 	int right_bounce[10] = {
 		547, 1048,
@@ -284,6 +296,12 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
+
+
+
+	App->renderer->Blit(table, App->player->flipLpos.x - 78 / 2, App->player->flipLpos.y - 48 / 2, &flipperLrect, 1.0f, App->player->flipperL->GetRotation());
+	App->renderer->Blit(table, App->player->flipRpos.x - 78 / 2, App->player->flipRpos.y - 48 / 2, &flipperRrect, 1.0f, App->player->flipperR->GetRotation());
+
 	if (lives <= 4)
 	{
 		ball->GetPosition(ballpos.x, ballpos.y);
