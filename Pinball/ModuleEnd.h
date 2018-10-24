@@ -19,6 +19,7 @@ public:
 	SDL_Texture* initTex;
 	PhysBody* play;
 	SDL_Rect initRect;
-
+	char finaltext[10];
+	int finalscoretext;
 
 };

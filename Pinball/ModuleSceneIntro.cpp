@@ -238,15 +238,16 @@ update_status ModuleInitScene::Update()
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		lives++;
 		LOG("%i", lives);
+	    finalscore = points;
+	
 	}
 
-<<<<<<< HEAD
-	if (lives == 4)
-=======
+
+
 	//Restart and game over logics
 
 	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
->>>>>>> a334ca0c4c4fb46c0c5897f1abc14ecf079667e3
+
 	{
 		if (points > highscore)
 		{

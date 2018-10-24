@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleFonts.h"
 #include "ModuleEnd.h"
 
 ModuleEnd::ModuleEnd(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -26,6 +27,7 @@ bool ModuleEnd::Start()
 	App->physics->Disable();
 	App->initScene->Disable();
 	play = App->physics->CreateRectangleSensor(215, 390, 200, 50);
+	finalscoretext = App->fonts->Load("pinball/numbers.png", "0123456789", 1);
 
 	return true;
 }
@@ -40,6 +42,9 @@ update_status ModuleEnd::Update()
 	}
 	
 	App->renderer->Blit(initTex, 0, 0, &initRect);
+	sprintf_s(finaltext, 10, "%7d", App->scene_intro->finalscore);
+	App->fonts->BlitText(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, finalscoretext, finaltext);
+
 	return UPDATE_CONTINUE;
 }
 

@@ -39,7 +39,7 @@ Application::Application()
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(fonts);
+
 
 	// Scenes
 	
@@ -48,7 +48,9 @@ Application::Application()
 	// Player
 	AddModule(player);
 	AddModule(endScene);
+	
 	AddModule(initScene);
+	AddModule(fonts);
 }
 
 Application::~Application()

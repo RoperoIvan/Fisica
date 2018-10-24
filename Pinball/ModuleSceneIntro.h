@@ -88,6 +88,7 @@ public:
 	int lives = 0;
 	int points = 0;
 	int score;
+	int finalscore;
 	char text[10];
 	char text2[10];
 	char text3[10];
