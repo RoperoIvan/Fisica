@@ -45,7 +45,8 @@ public:
 	PhysBody* sensorlittle;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
-	
+	PhysBody* sensorvolume;
+	PhysBody* sensorfx;
 
 
 	SDL_Rect tablerect;
@@ -77,6 +78,8 @@ public:
 	bool collision9 = false;
 	bool tp = false;
 	bool tp2 = false;
+	bool mute = false;
+	bool mutefx = false;
 	int combo = 0;
 	int combo2 = 0;
 	int highscore = 0;

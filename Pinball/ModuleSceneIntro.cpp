@@ -33,7 +33,8 @@ bool ModuleInitScene::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	table = App->textures->Load("pinball/Texturas2.png");
 	score = App->fonts->Load("pinball/numbers.png","0123456789", 1);
-	
+	App->audio->PlayMusic("pinball/song.ogg");
+	Mix_VolumeMusic(20);
 
 	tablerect.x = 222;
 	tablerect.y = 369;
@@ -188,6 +189,9 @@ bool ModuleInitScene::Start()
 	sensorhole = App->physics->CreateCircleSensor(holepos.x, holepos.y, 10);
 	sensorhole2 = App->physics->CreateCircleSensor(holepos2.x, holepos2.y, 10);
 	sensorlittle = App->physics->CreateCircleSensor(circlepos2.x, circlepos2.y, 15);
+
+	sensorfx = App->physics->CreateRectangleSensor(410, 42, 24, 24);
+	sensorvolume = App->physics->CreateRectangleSensor(39, 42, 24, 24);
 
 	rightBounce = App->physics->CreateChain(bounpos.x, bounpos.y, right_bounce, 10);
 	leftBounce = App->physics->CreateChain(bounpos.x, bounpos.y, left_bounce, 14);
@@ -431,6 +435,37 @@ update_status ModuleInitScene::Update()
 		c = c->next;
 	}*/
 	
+	//Audio volume management
+
+	if (App->input->GetMouseX() <= 44 && App->input->GetMouseY() <= 42 && App->input->GetMouseX() >= 20 && App->input->GetMouseY() >= 18 && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		mute = !mute;
+	}
+
+	if (mute)
+	{
+		Mix_VolumeMusic(0);
+	}
+	if (!mute)
+	{
+		Mix_VolumeMusic(20);
+	}
+
+	/*if (App->input->GetMouseX() <= 410 && App->input->GetMouseY() <= 42 && App->input->GetMouseX() >= 386 && App->input->GetMouseY() >= 18 && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		mutefx = !mutefx;
+	}
+
+	if (mutefx)
+	{
+		Mix_VolumeChunk(0);
+	}
+	if (!mutefx)
+	{
+		Mix_VolumeChunk(20);
+	}*/
+
+
 	
 	sprintf_s(text, 10, "%7d", points);
 	App->fonts->BlitText(135, 35, score, text);

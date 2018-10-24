@@ -1,7 +1,5 @@
-﻿  Application.cpp
-c:\users\isabel\desktop\class vec3\fisica\pinball\animation.h(41): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
-  ModuleInit.cpp
-c:\users\isabel\desktop\class vec3\fisica\pinball\animation.h(41): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\isabel\desktop\class vec3\fisica\pinball\moduleinit.cpp(10): error C2572: 'ModuleInit::ModuleInit': nueva definición de parámetro predeterminado: parámetro 1
-  c:\users\isabel\desktop\class vec3\fisica\pinball\moduleinit.h(10): note: vea la declaración de 'ModuleInit::ModuleInit'
-  Generando código...
+﻿  ModuleSceneIntro.cpp
+c:\users\iván\documents\github\fisica\pinball\animation.h(41): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\iván\documents\github\fisica\pinball\modulesceneintro.cpp(143): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\iván\documents\github\fisica\pinball\modulesceneintro.cpp(144): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  SDL Game.vcxproj -> C:\Users\Iván\Documents\GitHub\Fisica\Pinball\Debug\2D Physics - class 4.exe

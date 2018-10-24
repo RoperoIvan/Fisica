@@ -7,7 +7,7 @@
 #include "ModulePlayer.h"
 
 
-ModuleInit::ModuleInit(Application* app, bool start_enabled = true) : Module(app, start_enabled)
+ModuleInit::ModuleInit(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	initTex = nullptr;
 }
