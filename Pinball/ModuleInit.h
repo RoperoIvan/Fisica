@@ -17,7 +17,7 @@ public:
 public:
 
 	SDL_Texture* initTex;
-
+	PhysBody* play;
 	SDL_Rect initRect;
 	
 

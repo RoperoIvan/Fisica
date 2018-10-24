@@ -8,6 +8,7 @@
 #include "ModulePhysics.h"
 #include "ModuleFonts.h"
 #include "ModulePlayer.h"
+#include "ModuleEnd.h"
 
 ModuleInitScene::ModuleInitScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -25,6 +26,7 @@ bool ModuleInitScene::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	App->endScene->Disable();
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	/*circle = App->textures->Load("pinball/wheel.png"); */
@@ -227,7 +229,7 @@ update_status ModuleInitScene::Update()
 		LOG("%i", lives);
 	}
 
-	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (lives == 4)
 	{
 		/*ballpos.x = 422;
 		ballpos.y = 600;*/
@@ -241,6 +243,7 @@ update_status ModuleInitScene::Update()
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		lives = 0;
 		points = 0;
+		App->endScene->Enable();
 	}
 	if (tp)
 	{

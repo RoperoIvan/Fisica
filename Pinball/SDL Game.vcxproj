@@ -72,6 +72,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="ModuleEnd.h" />
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleInit.h" />
     <ClInclude Include="ModulePhysics.h" />
@@ -94,6 +95,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
+    <ClCompile Include="ModuleEnd.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleInit.cpp" />
     <ClCompile Include="ModuleInput.cpp" />

@@ -1,5 +1,3 @@
-﻿  ModuleSceneIntro.cpp
-c:\users\iván\documents\github\fisica\pinball\animation.h(41): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\iván\documents\github\fisica\pinball\modulesceneintro.cpp(143): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\iván\documents\github\fisica\pinball\modulesceneintro.cpp(144): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  SDL Game.vcxproj -> C:\Users\Iván\Documents\GitHub\Fisica\Pinball\Debug\2D Physics - class 4.exe
+﻿  ModuleEnd.cpp
+c:\users\isabel\desktop\class vec3\fisica\pinball\animation.h(41): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
+  SDL Game.vcxproj -> C:\Users\Isabel\Desktop\class vec3\Fisica\Pinball\Debug\2D Physics - class 4.exe

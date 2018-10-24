@@ -28,7 +28,7 @@ bool ModulePlayer::Start()
 	dockanim.loop = false;
 	dockanim.speed = 0.05f;
 
-	flipRpos = { 269,697 };
+	flipRpos = { 279,697 };
 	flipLpos = { 178,697 };
 	dockpos = { 415, 650 };
 
@@ -44,7 +44,6 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
-
 	return true;
 }
 
