@@ -420,7 +420,10 @@ update_status ModuleInitScene::Update()
 	App->fonts->BlitText(300,35, score, text2);
 
 	sprintf_s(text3, 10, "%7d", highscore);
-	App->fonts->BlitText(220, 35, score, text3);
+	App->fonts->BlitText(260, 35, score, text3);
+
+	sprintf_s(text4, 10, "%7d", previousscore);
+	App->fonts->BlitText(200, 35, score, text4);
 
 	return UPDATE_CONTINUE;
 }
@@ -461,6 +464,7 @@ update_status ModuleInitScene::PostUpdate()
 		lives = 0;
 		points = 0;
 		App->endScene->Enable();
+		previousscore = finalscore;
 	}
 
 	// Holes logic ( when the player enters in the hole the game destroys the ball and it create a new one in the other end of the hole)

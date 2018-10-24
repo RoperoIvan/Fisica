@@ -90,8 +90,9 @@ public:
 	int points = 0;
 	int score;
 	int finalscore;
+	int previousscore;
 	char text[10];
 	char text2[10];
 	char text3[10];
-
+	char text4[10];
 };
