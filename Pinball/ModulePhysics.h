@@ -63,4 +63,5 @@ private:
 	b2Body* ground;
 	b2RevoluteJoint* revolute_joint;
 	b2PrismaticJoint* prismatic_joint;
+	b2Body* body_clicked;
 };

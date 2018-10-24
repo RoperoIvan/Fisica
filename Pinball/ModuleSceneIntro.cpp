@@ -228,59 +228,6 @@ update_status ModuleInitScene::Update()
 
 	App->renderer->Blit(table, 0, 0, &tablerect);
 
-	// Logic of the lifes or chances of the player
-
-	if (ballpos.y >= 768 && lives < 4)
-	{
-		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 422;
-		ballpos.y = 600;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
-		lives++;
-		LOG("%i", lives);
-	    finalscore = points;
-	
-	}
-
-
-
-	//Restart and game over logics
-
-	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-
-	{
-		if (points > highscore)
-		{
-			highscore = points;
-		}
-		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 422;
-		ballpos.y = 600;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
-		lives = 0;
-		points = 0;
-		App->endScene->Enable();
-	}
-
-	// Holes logic ( when the player enters in the hole the game destroys the ball and it create a new one in the other end of the hole)
-
-	if (tp)
-	{
-		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 80;
-		ballpos.y = 480;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
-		tp = false;
-	}
-	if (tp2)
-	{
-		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 337;
-		ballpos.y = 562;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
-		tp2 = false;
-	}
-
 	// Combos logic (it restarts the state of the bouncers and blue sensors and it gives the right quantity of points)
 
 	if (combo == 4)
@@ -478,6 +425,65 @@ update_status ModuleInitScene::Update()
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleInitScene::PostUpdate()
+{
+
+
+	// Logic of the lifes or chances of the player
+
+	if (ballpos.y >= 768 && lives < 4 && !jointed)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 422;
+		ballpos.y = 600;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
+		lives++;
+		LOG("%i", lives);
+		finalscore = points;
+
+	}
+
+
+
+	//Restart and game over logics
+
+	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !jointed)
+
+	{
+		if (points > highscore)
+		{
+			highscore = points;
+		}
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 422;
+		ballpos.y = 600;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
+		lives = 0;
+		points = 0;
+		App->endScene->Enable();
+	}
+
+	// Holes logic ( when the player enters in the hole the game destroys the ball and it create a new one in the other end of the hole)
+
+	if (tp && !jointed)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 80;
+		ballpos.y = 480;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
+		tp = false;
+	}
+	if (tp2 && !jointed)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ballpos.x = 337;
+		ballpos.y = 562;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
+		tp2 = false;
+	}
+
+	return UPDATE_CONTINUE;
+}
 
 void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {

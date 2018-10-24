@@ -14,6 +14,7 @@ public:
 
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
@@ -77,7 +78,7 @@ public:
 	bool collision7 = false;
 	bool collision8 = false;
 	bool collision9 = false;
-
+	bool jointed = false;
 	bool tp = false;
 	bool tp2 = false;
 	bool mute = false;
