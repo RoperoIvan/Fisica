@@ -17,23 +17,23 @@ ModuleInit::~ModuleInit()
 
 bool ModuleInit::Start()
 {
-	initRect = {291,20,441,728};
+	/*initRect = {291,20,441,728};
 	initTex = App->textures->Load("pinball/init_scene.png");
 
-	App->player->CleanUp();
+	App->player->CleanUp();*/
 
 	return true;
 }
 
 update_status ModuleInit::Update()
 {
-	App->renderer->Blit(initTex, 0, 0, &initRect);
+	/*App->renderer->Blit(initTex, 0, 0, &initRect);*/
 
 	return UPDATE_CONTINUE;
 }
 
 bool ModuleInit::CleanUp()
 {
-	App->textures->Unload(initTex);
+	//App->textures->Unload(initTex);
 	return true;
 }
