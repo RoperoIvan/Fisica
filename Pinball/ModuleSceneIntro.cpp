@@ -29,14 +29,16 @@ bool ModuleInitScene::Start()
 	App->endScene->Disable();
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	/*circle = App->textures->Load("pinball/wheel.png"); */
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	bluefx = App->audio->LoadFx("pinball/bluesensor.wav");
 	table = App->textures->Load("pinball/Texturas2.png");
 	score = App->fonts->Load("pinball/numbers.png","0123456789", 1);
 	App->audio->PlayMusic("pinball/song.ogg");
 	Mix_VolumeMusic(20);
+
+	//Rectangle measurements
 
 	tablerect.x = 222;
 	tablerect.y = 369;
@@ -136,6 +138,8 @@ bool ModuleInitScene::Start()
 		562, 868
 	};
 
+	//Initializing all the positions of the bodies
+
 	ballpos.x = 422;
 	ballpos.y = 600;
 	circlepos.x = 336;
@@ -163,27 +167,28 @@ bool ModuleInitScene::Start()
 	bouncerlpos.x = 70;
 	bouncerlpos.y = 529;
 	
+	//Creating the bodies
+
 	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 
-	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
+	//BOUNCERS
 
+	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
 	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium = App->physics->CreateCircleStatic(bouncermpos.x, bouncermpos.y, 17);
-
 	bouncermedium->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium2 = App->physics->CreateCircleStatic(bouncermpos2.x, bouncermpos2.y, 17);
-
 	bouncermedium2->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium3 = App->physics->CreateCircleStatic(bouncermpos3.x, bouncermpos3.y, 17);
-	
 	bouncermedium3->body->GetFixtureList()->SetRestitution(1.5f);
 
-	bouncerlittle = App->physics->CreateCircleStatic(bouncerlpos.x, bouncerlpos.y, 12);
-	
+	bouncerlittle = App->physics->CreateCircleStatic(bouncerlpos.x, bouncerlpos.y, 12);	
 	bouncerlittle->body->GetFixtureList()->SetRestitution(1.5f);
+
+	//SENSORS
 
 	sensor = App->physics->CreateCircleSensor(circlepos.x, circlepos.y, 18);
 	sensor2 = App->physics->CreateCircleSensor(circlepos3.x, circlepos3.y, 18);
@@ -194,6 +199,8 @@ bool ModuleInitScene::Start()
 
 	sensorfx = App->physics->CreateRectangleSensor(410, 42, 24, 24);
 	sensorvolume = App->physics->CreateRectangleSensor(39, 42, 24, 24);
+
+	//BOUNCES
 
 	rightBounce = App->physics->CreateChain(bounpos.x, bounpos.y, right_bounce, 10);
 	leftBounce = App->physics->CreateChain(bounpos.x, bounpos.y, left_bounce, 14);
@@ -217,7 +224,11 @@ bool ModuleInitScene::CleanUp()
 // Update: draw background
 update_status ModuleInitScene::Update()
 {
+	// Table draw function
+
 	App->renderer->Blit(table, 0, 0, &tablerect);
+
+	// Logic of the lifes or chances of the player
 
 	if (ballpos.y >= 768 && lives < 4)
 	{
@@ -229,10 +240,14 @@ update_status ModuleInitScene::Update()
 		LOG("%i", lives);
 	}
 
+<<<<<<< HEAD
 	if (lives == 4)
+=======
+	//Restart and game over logics
+
+	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+>>>>>>> a334ca0c4c4fb46c0c5897f1abc14ecf079667e3
 	{
-		/*ballpos.x = 422;
-		ballpos.y = 600;*/
 		if (points > highscore)
 		{
 			highscore = points;
@@ -245,6 +260,9 @@ update_status ModuleInitScene::Update()
 		points = 0;
 		App->endScene->Enable();
 	}
+
+	// Holes logic ( when the player enters in the hole the game destroys the ball and it create a new one in the other end of the hole)
+
 	if (tp)
 	{
 		App->physics->world->DestroyBody(ball->body);
@@ -261,6 +279,8 @@ update_status ModuleInitScene::Update()
 		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		tp2 = false;
 	}
+
+	// Combos logic (it restarts the state of the bouncers and blue sensors and it gives the right quantity of points)
 
 	if (combo == 4)
 	{
@@ -282,19 +302,13 @@ update_status ModuleInitScene::Update()
 		collision9 = false;
 	}
 
+	// Create a test ball to do the necessary checks
+
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 8));
-		circles.getLast()->data->listener = this;
+		App->physics->world->DestroyBody(ball->body);
+		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7);
 	}
-
-
-	/*if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 20,40));
-		
-	}
-*/
 
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -302,13 +316,13 @@ update_status ModuleInitScene::Update()
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
 
-	// All draw functions ------------------------------------------------------
-
-
+	// Flippers draw
 
 	App->renderer->Blit(table, App->player->flipLpos.x - 78 / 2, App->player->flipLpos.y - 48 / 2, &flipperLrect, 1.0f, App->player->flipperL->GetRotation());
 	App->renderer->Blit(table, App->player->flipRpos.x - 78 / 2, App->player->flipRpos.y - 48 / 2, &flipperRrect, 1.0f, App->player->flipperR->GetRotation());
 
+
+	//Lifes condition of draw 
 	if (lives <= 4)
 	{
 		ball->GetPosition(ballpos.x, ballpos.y);
@@ -316,6 +330,7 @@ update_status ModuleInitScene::Update()
 		App->renderer->Blit(table, ballpos.x, ballpos.y, &ballrect);
 	}
 	
+	//Collisions 
 	
 	sensor->GetPosition(circlepos.x, circlepos.y);
 	if (!collision2)
@@ -418,26 +433,6 @@ update_status ModuleInitScene::Update()
 		c = c->next;
 	}
 
-	/*c = clicker.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(table, x, y, &clickerrect, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}*/
-	
 	//Audio volume management
 
 	if (App->input->GetMouseX() <= 44 && App->input->GetMouseY() <= 42 && App->input->GetMouseX() >= 20 && App->input->GetMouseY() >= 18 && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
@@ -454,21 +449,21 @@ update_status ModuleInitScene::Update()
 		Mix_VolumeMusic(20);
 	}
 
-	/*if (App->input->GetMouseX() <= 410 && App->input->GetMouseY() <= 42 && App->input->GetMouseX() >= 386 && App->input->GetMouseY() >= 18 && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		mutefx = !mutefx;
-	}
+	//if (App->input->GetMouseX() <= 410 && App->input->GetMouseY() <= 42 && App->input->GetMouseX() >= 386 && App->input->GetMouseY() >= 18 && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	//{
+	//	mutefx = !mutefx;
+	//}
 
-	if (mutefx)
-	{
-		Mix_VolumeChunk(0);
-	}
-	if (!mutefx)
-	{
-		Mix_VolumeChunk(20);
-	}*/
+	//if (mutefx)
+	//{
+	//	Mix_Volume
+	//}
+	//if (!mutefx)
+	//{
+	//	Mix_VolumeChunk(20);
+	//}
 
-
+	// Player 's draw of the Points, Highscore and Lifes 
 	
 	sprintf_s(text, 10, "%7d", points);
 	App->fonts->BlitText(135, 35, score, text);
@@ -481,6 +476,7 @@ update_status ModuleInitScene::Update()
 
 	return UPDATE_CONTINUE;
 }
+
 
 void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
@@ -498,12 +494,13 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			{
 				combo2--;
 			}
-			points += 10;
+			points += 5;
 		}
 
 		if (bodyA == ball && bodyB == sensor || bodyA == sensor && bodyB == ball)
 		{
 			collision2 = !collision2;
+			App->audio->PlayFx(bluefx);
 			if (collision2 == true)
 			{
 				combo++;
@@ -526,6 +523,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == sensorlittle || bodyA == sensorlittle && bodyB == ball)
 		{
 			collision3 = !collision3;
+			App->audio->PlayFx(bluefx);
 			if (collision3 == true)
 			{
 				combo++;
@@ -539,6 +537,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == sensor2 || bodyA == sensor2 && bodyB == ball)
 		{
 			collision4 = !collision4;
+			App->audio->PlayFx(bluefx);
 			if (collision4 == true)
 			{
 				combo++;
@@ -552,6 +551,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == sensor3 || bodyA == sensor3 && bodyB == ball)
 		{
 			collision5 = !collision5;
+			App->audio->PlayFx(bluefx);
 			if (collision5 == true)
 			{
 				combo++;
@@ -565,6 +565,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == bouncermedium || bodyA == bouncermedium && bodyB == ball)
 		{
 			collision6 = !collision6;
+			App->audio->PlayFx(bonus_fx);
 			if (collision6 == true)
 			{
 				combo2++;
@@ -578,6 +579,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == bouncermedium2 || bodyA == bouncermedium2 && bodyB == ball)
 		{
 			collision7 = !collision7;
+			App->audio->PlayFx(bonus_fx);
 			if (collision7 == true)
 			{
 				combo2++;
@@ -591,6 +593,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == bouncermedium3 || bodyA == bouncermedium3 && bodyB == ball)
 		{
 			collision8 = !collision8;
+			App->audio->PlayFx(bonus_fx);
 			if (collision8 == true)
 			{
 				combo2++;
@@ -604,6 +607,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == bouncerlittle || bodyA == bouncerlittle && bodyB == ball)
 		{
 			collision9 = !collision9;
+			App->audio->PlayFx(bonus_fx);
 			if (collision9 == true)
 			{
 				combo2++;
@@ -612,7 +616,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			{
 				combo2--;
 			}
-			points += 10;
+			points += 15;
 		}
 	}
 	
