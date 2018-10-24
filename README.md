@@ -1,4 +1,4 @@
-# Physic's Pinball
+﻿# Physic's Pinball
 
 
 ## Students
@@ -42,7 +42,7 @@
 
 - R = restart when you lose the game.
 
-- LEFT MOUSE BUTTON = if you click in the music or sound icon you will mute the music of the game. If you click again you will unmute the music. / Also if you click and hold the ball you will be able to drag it. If you release it the joint will disappear.
+- LEFT MOUSE BUTTON = if you click in the music or sound icon you will mute the music of the game. If you click again you will unmute the music. / Also if you are in debug mode and you click and hold the ball you will be able to drag it. If you release it the joint will disappear.
 
 - SPACEBAR = to pass between the initial scene and the lose scene.
 
