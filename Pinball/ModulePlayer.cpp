@@ -52,14 +52,14 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	current_animation = &idle;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		flipperR->body->ApplyForceToCenter({ 0,-100 }, true);
+		flipperR->body->ApplyForceToCenter({ 0,-1000 }, true);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		flipperL->body->ApplyForceToCenter({ 0,-100 }, true);
+		flipperL->body->ApplyForceToCenter({ 0,-1000 }, true);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{

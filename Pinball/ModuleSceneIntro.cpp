@@ -40,10 +40,10 @@ bool ModuleSceneIntro::Start()
 	tablerect.h = 730;
 	tablerect.w = 442;
 
-	ballrect.x = 11;
-	ballrect.y = 427;
-	ballrect.h = 19;
-	ballrect.w = 20;
+	ballrect.x = 9;
+	ballrect.y = 434;
+	ballrect.h = 14;
+	ballrect.w = 14;
 
 	clickerrect.x = 9;
 	clickerrect.y = 565;
@@ -133,8 +133,8 @@ bool ModuleSceneIntro::Start()
 		562, 868
 	};
 
-	ballpos.x = 63;
-	ballpos.y = 500;
+	ballpos.x = 422;
+	ballpos.y = 600;
 	circlepos.x = 336;
 	circlepos.y = 352;
 	bouncerpos.x = 145;
@@ -157,45 +157,45 @@ bool ModuleSceneIntro::Start()
 	bouncermpos2.y = 167;
 	bouncermpos3.x = 204;
 	bouncermpos3.y = 531;
-	bouncerlpos.x = 63;
+	bouncerlpos.x = 70;
 	bouncerlpos.y = 529;
 	
-	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+	ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 
 	bouncer = App->physics->CreateCircleStatic(bouncerpos.x, bouncerpos.y, 27);
-	bouncer->body->GetFixtureList()->SetDensity(10.0f);
+
 	bouncer->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium = App->physics->CreateCircleStatic(bouncermpos.x, bouncermpos.y, 17);
-	bouncermedium->body->GetFixtureList()->SetDensity(10.0f);
+
 	bouncermedium->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium2 = App->physics->CreateCircleStatic(bouncermpos2.x, bouncermpos2.y, 17);
-	bouncermedium2->body->GetFixtureList()->SetDensity(10.0f);
+
 	bouncermedium2->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncermedium3 = App->physics->CreateCircleStatic(bouncermpos3.x, bouncermpos3.y, 17);
-	bouncermedium3->body->GetFixtureList()->SetDensity(10.0f);
+	
 	bouncermedium3->body->GetFixtureList()->SetRestitution(1.5f);
 
 	bouncerlittle = App->physics->CreateCircleStatic(bouncerlpos.x, bouncerlpos.y, 12);
-	bouncerlittle->body->GetFixtureList()->SetDensity(10.0f);
+	
 	bouncerlittle->body->GetFixtureList()->SetRestitution(1.5f);
 
 	sensor = App->physics->CreateCircleSensor(circlepos.x, circlepos.y, 18);
 	sensor2 = App->physics->CreateCircleSensor(circlepos3.x, circlepos3.y, 18);
 	sensor3 = App->physics->CreateCircleSensor(circlepos4.x, circlepos4.y, 18);
-	sensorhole = App->physics->CreateCircleSensor(holepos.x, holepos.y, 15);
-	sensorhole2 = App->physics->CreateCircleSensor(holepos2.x, holepos2.y, 15);
+	sensorhole = App->physics->CreateCircleSensor(holepos.x, holepos.y, 10);
+	sensorhole2 = App->physics->CreateCircleSensor(holepos2.x, holepos2.y, 10);
 	sensorlittle = App->physics->CreateCircleSensor(circlepos2.x, circlepos2.y, 15);
 
 	rightBounce = App->physics->CreateChain(bounpos.x, bounpos.y, right_bounce, 10);
 	leftBounce = App->physics->CreateChain(bounpos.x, bounpos.y, left_bounce, 14);
 	topBounce = App->physics->CreateChain(bounpos.x, bounpos.y, top_bounce, 12);
 
-	rightBounce->body->GetFixtureList()->SetRestitution(1.5f);
-	leftBounce->body->GetFixtureList()->SetRestitution(1.5f);
-	topBounce->body->GetFixtureList()->SetRestitution(1.5f);
+	rightBounce->body->GetFixtureList()->SetRestitution(0.5f);
+	leftBounce->body->GetFixtureList()->SetRestitution(0.5f);
+	topBounce->body->GetFixtureList()->SetRestitution(0.5f);
 	return ret;
 }
 
@@ -216,9 +216,9 @@ update_status ModuleSceneIntro::Update()
 	if (ballpos.y >= 768 && lives < 4)
 	{
 		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 300;
+		ballpos.x = 422;
 		ballpos.y = 600;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		lives++;
 		LOG("%i", lives);
 	}
@@ -232,9 +232,9 @@ update_status ModuleSceneIntro::Update()
 			highscore = points;
 		}
 		App->physics->world->DestroyBody(ball->body);
-		ballpos.x = 335;
-		ballpos.y = 140;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		ballpos.x = 422;
+		ballpos.y = 600;
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		lives = 0;
 		points = 0;
 	}
@@ -243,7 +243,7 @@ update_status ModuleSceneIntro::Update()
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 80;
 		ballpos.y = 480;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		tp = false;
 	}
 	if (tp2)
@@ -251,7 +251,7 @@ update_status ModuleSceneIntro::Update()
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 337;
 		ballpos.y = 562;
-		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 10);
+		ball = App->physics->CreateCircle(ballpos.x, ballpos.y, 7);
 		tp2 = false;
 	}
 
@@ -437,6 +437,9 @@ update_status ModuleSceneIntro::Update()
 
 	sprintf_s(text2, 10, "%7d", lives);
 	App->fonts->BlitText(300,35, score, text2);
+
+	sprintf_s(text3, 10, "%7d", highscore);
+	App->fonts->BlitText(220, 35, score, text3);
 
 	return UPDATE_CONTINUE;
 }

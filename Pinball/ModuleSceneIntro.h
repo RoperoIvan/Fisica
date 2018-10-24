@@ -85,5 +85,6 @@ public:
 	int score;
 	char text[10];
 	char text2[10];
-	int chances;
+	char text3[10];
+
 };
