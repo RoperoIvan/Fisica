@@ -38,11 +38,15 @@
 
 - RIGHT ARROW = move the right flipper.
 
-- BOTTOM ARROW = shoot the dock.
+- BOTTOM ARROW = shoot the ball with the dock.
 
 - R = restart when you lose the game.
 
 - LEFT MOUSE BUTTON = if you click in the music or sound icon you will mute the music or fx of the game. If you click again you will unmute the music and fxs.
+
+- SPACEBAR = to pass between the initial scene and the lose scene.
+
+- F1 = you will see the debug mode.
 
 ## Combos
 
@@ -58,3 +62,5 @@ We have implented 2 different combos:
 We have imported the music from : https://www.youtube.com/watch?v=D88doSl61Kc
 
 and the fxs mostly from here: https://www.vpforums.org/Tutorials/Sounds/SndLib1.html 
+
+and from here: https://opengameart.org/content/512-sound-effects-8-bit-style
