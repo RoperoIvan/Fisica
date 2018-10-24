@@ -10,9 +10,10 @@ class ModuleTextures;
 class ModuleInput;
 class ModuleAudio;
 class ModulePlayer;
-class ModuleSceneIntro;
+class ModuleInitScene;
 class ModulePhysics;
 class ModuleFonts;
+class ModuleInit;
 
 class Application
 {
@@ -23,9 +24,10 @@ public:
 	ModuleInput* input;
 	ModuleAudio* audio;
 	ModulePlayer* player;
-	ModuleSceneIntro* scene_intro;
+	ModuleInitScene* scene_intro;
 	ModulePhysics* physics;
 	ModuleFonts* fonts;
+	ModuleInit* initScene;
 
 private:
 

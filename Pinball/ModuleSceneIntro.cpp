@@ -9,18 +9,18 @@
 #include "ModuleFonts.h"
 #include "ModulePlayer.h"
 
-ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleInitScene::ModuleInitScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	circle = box = rick = NULL;
 	table = NULL;
 
 }
 
-ModuleSceneIntro::~ModuleSceneIntro()
+ModuleInitScene::~ModuleInitScene()
 {}
 
 // Load assets
-bool ModuleSceneIntro::Start()
+bool ModuleInitScene::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
@@ -200,7 +200,7 @@ bool ModuleSceneIntro::Start()
 }
 
 // Load assets
-bool ModuleSceneIntro::CleanUp()
+bool ModuleInitScene::CleanUp()
 {
 	LOG("Unloading Intro scene");
 	App->textures->Unload(table);
@@ -209,7 +209,7 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneIntro::Update()
+update_status ModuleInitScene::Update()
 {
 	App->renderer->Blit(table, 0, 0, &tablerect);
 
@@ -444,7 +444,7 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if (bodyA != NULL && bodyB != NULL) 
 	{	
