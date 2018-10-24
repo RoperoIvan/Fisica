@@ -17,7 +17,7 @@
 
 - Link : https://www.classicgame.com/game/Neon+Pinball
 
-## List of diferencies
+## List of differencies
 
 - Our pinball does not have the same sounds and music.
 
