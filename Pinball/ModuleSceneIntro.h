@@ -28,6 +28,7 @@ public:
 	SDL_Texture* rick;
 	SDL_Texture* table;
 	uint bonus_fx;
+	uint bluefx;
 
 	PhysBody* ball;
 	PhysBody* circlepoint;
@@ -76,6 +77,7 @@ public:
 	bool collision7 = false;
 	bool collision8 = false;
 	bool collision9 = false;
+
 	bool tp = false;
 	bool tp2 = false;
 	bool mute = false;

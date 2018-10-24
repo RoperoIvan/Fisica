@@ -23,6 +23,8 @@ public:
 
 	SDL_Rect dockrect;
 
+	uint flipperfx;
+
 	PhysBody * flipperR;
 	PhysBody* flipperL;
 	PhysBody* dock;
