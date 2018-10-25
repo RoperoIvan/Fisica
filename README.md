@@ -31,6 +31,8 @@
 
 - The values of the restitution in bouncers and the dock's force probably is not the same.
 
+- The ball is a little bit smaller.
+
 
 ## Controls
 
@@ -40,9 +42,7 @@
 
 - BOTTOM ARROW = shoot the ball with the dock.
 
-- LEFT MOUSE BUTTON = if you click in the music or sound icon you will mute the music of the game. If you click again you will unmute the music. / Also if you are in debug mode and you click and hold the ball you will be able to drag it. If you release it the joint will disappear.
-
-- SPACEBAR = to pass between the initial scene and the lose scene.
+- LEFT MOUSE BUTTON = if you click in the music or sound icon you will mute the music of the game. If you click again you will unmute the music. / Also if you are in debug mode and you click and hold the ball you will be able to drag it. If you release it the joint will disappear./ Also if you click in the "Jugar" button you will start a new game. The same with the button "Jugar otra vez", that will return you to the main screen.
 
 - F1 = you will see the debug mode.
 
