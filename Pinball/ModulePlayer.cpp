@@ -25,19 +25,20 @@ bool ModulePlayer::Start()
 
 	idle.PushBack({ 21,665,21,60 });
 
+	
 	dockanim.PushBack({ 20,764,20,60 });
 	dockanim.PushBack({ 78,708,20,70 });
 	dockanim.loop = false;
 	dockanim.speed = 0.05f;
 
 	flipRpos = { 279,697 };
-	flipLpos = { 178,697 };
+	flipLpos = { 175,697 };
 	dockpos = { 415, 650 };
 
 	dock = App->physics->CreateDock(dockpos.x, dockpos.y, 21, 60);
 
-	flipperL = App->physics->CreateFlipper(flipLpos.x, flipLpos.y, 68, 33, false);
-	flipperR = App->physics->CreateFlipper(flipRpos.x, flipRpos.y, 68, 33, true);
+	flipperL = App->physics->CreateFlipper(flipLpos.x, flipLpos.y, 71, 28, false);
+	flipperR = App->physics->CreateFlipper(flipRpos.x, flipRpos.y, 71, 28, true);
 
 	return true;
 }

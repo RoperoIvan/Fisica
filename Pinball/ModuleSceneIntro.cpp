@@ -104,15 +104,15 @@ bool ModuleInitScene::Start()
 	orangecircle.w = 37;
 
 
-	flipperLrect.x = 24;
-	flipperLrect.y = 473;
-	flipperLrect.h = 33;
-	flipperLrect.w = 68;
+	flipperLrect.x = 25;
+	flipperLrect.y = 478;
+	flipperLrect.h = 28;
+	flipperLrect.w = 72;
 
-	flipperRrect.x = 113;
-	flipperRrect.y = 475;
-	flipperRrect.h = 33;
-	flipperRrect.w = 68;
+	flipperRrect.x = 110;
+	flipperRrect.y = 480;
+	flipperRrect.h = 28;
+	flipperRrect.w = 71;
 
 	int right_bounce[10] = {
 		547, 1048,
@@ -263,8 +263,8 @@ update_status ModuleInitScene::Update()
 
 	// Flippers draw
 
-	App->renderer->Blit(table, App->player->flipLpos.x - 78 / 2, App->player->flipLpos.y - 48 / 2, &flipperLrect, 1.0f, App->player->flipperL->GetRotation());
-	App->renderer->Blit(table, App->player->flipRpos.x - 78 / 2, App->player->flipRpos.y - 48 / 2, &flipperRrect, 1.0f, App->player->flipperR->GetRotation());
+	App->renderer->Blit(table, App->player->flipLpos.x - 72 / 2, App->player->flipLpos.y - 28 / 2, &flipperLrect, 1.0f, App->player->flipperL->GetRotation());
+	App->renderer->Blit(table, App->player->flipRpos.x - 72 / 2, App->player->flipRpos.y - 28 / 2, &flipperRrect, 1.0f, App->player->flipperR->GetRotation());
 
 
 	//Lifes condition of draw 

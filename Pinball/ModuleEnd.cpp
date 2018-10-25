@@ -26,7 +26,6 @@ bool ModuleEnd::Start()
 	App->player->Disable();
 	App->physics->Disable();
 	App->initScene->Disable();
-	play = App->physics->CreateRectangleSensor(215, 390, 200, 50);
 	finalscoretext = App->fonts->Load("pinball/numbers.png", "0123456789", 1);
 
 	return true;
@@ -35,7 +34,7 @@ bool ModuleEnd::Start()
 update_status ModuleEnd::Update()
 {
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && App->input->GetMouseX() >= 115 && App->input->GetMouseX() <= 315 && App->input->GetMouseY() >= 450 && App->input->GetMouseY() <= 550)
 	{
 		App->initScene->Enable();
 		this->Disable();
