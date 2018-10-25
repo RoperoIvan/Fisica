@@ -250,14 +250,6 @@ update_status ModuleInitScene::Update()
 		collision9 = false;
 	}
 
-	// Create a test ball to do the necessary checks
-
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		App->physics->world->DestroyBody(ball->body);
-		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7);
-	}
-
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -370,16 +362,6 @@ update_status ModuleInitScene::Update()
 		App->renderer->Blit(table, bouncerlpos.x, bouncerlpos.y, &brightclickerlittle);
 	}
 	
-	
-	p2List_item<PhysBody*>* c = circles.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(table, x, y, &ballrect, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
 
 	//Audio volume management
 
@@ -431,6 +413,14 @@ update_status ModuleInitScene::Update()
 update_status ModuleInitScene::PostUpdate()
 {
 
+
+	// Create a test ball to do the necessary checks
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && !jointed)
+	{
+		App->physics->world->DestroyBody(ball->body);
+		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 7);
+	}
 
 	// Logic of the lifes or chances of the player
 
