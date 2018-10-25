@@ -33,6 +33,9 @@ bool ModuleInitScene::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	bluefx = App->audio->LoadFx("pinball/bluesensor.wav");
+	combofx = App->audio->LoadFx("pinball/combodone.wav");
+	topbouncefx = App->audio->LoadFx("pinball/topbouncefx.wav");
+	tpfx = App->audio->LoadFx("pinball/tpfx.wav");
 	table = App->textures->Load("pinball/Texturas2.png");
 	score = App->fonts->Load("pinball/numbers.png","0123456789", 1);
 	App->audio->PlayMusic("pinball/song.ogg");
@@ -140,7 +143,7 @@ bool ModuleInitScene::Start()
 
 	//Initializing all the positions of the bodies
 
-	ballpos.x = 422;
+	ballpos.x = 415;
 	ballpos.y = 600;
 	circlepos.x = 336;
 	circlepos.y = 352;
@@ -232,6 +235,7 @@ update_status ModuleInitScene::Update()
 
 	if (combo == 4)
 	{
+		App->audio->PlayFx(combofx);
 		points += 40;
 		combo = 0;
 		collision2 = false;
@@ -241,6 +245,7 @@ update_status ModuleInitScene::Update()
 	}
 	if (combo2 == 5)
 	{
+		App->audio->PlayFx(combofx);
 		points += 50;
 		combo2 = 0;
 		collision = false;
@@ -263,7 +268,7 @@ update_status ModuleInitScene::Update()
 
 
 	//Lifes condition of draw 
-	if (lives <= 4)
+	if (lives <= 5)
 	{
 		ball->GetPosition(ballpos.x, ballpos.y);
 		ball->listener = this;
@@ -424,7 +429,7 @@ update_status ModuleInitScene::PostUpdate()
 
 	// Logic of the lifes or chances of the player
 
-	if (ballpos.y >= 768 && lives < 4 && !jointed)
+	if (ballpos.y >= 768 && lives < 5 && !jointed)
 	{
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 422;
@@ -440,7 +445,7 @@ update_status ModuleInitScene::PostUpdate()
 
 	//Restart and game over logics
 
-	if (lives == 4 && App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && !jointed)
+	if (lives == 5 && !jointed)
 
 	{
 		if (points > highscore)
@@ -461,6 +466,7 @@ update_status ModuleInitScene::PostUpdate()
 
 	if (tp && !jointed)
 	{
+		App->audio->PlayFx(tpfx);
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 80;
 		ballpos.y = 480;
@@ -469,6 +475,7 @@ update_status ModuleInitScene::PostUpdate()
 	}
 	if (tp2 && !jointed)
 	{
+		App->audio->PlayFx(tpfx);
 		App->physics->world->DestroyBody(ball->body);
 		ballpos.x = 337;
 		ballpos.y = 562;
@@ -618,6 +625,10 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 				combo2--;
 			}
 			points += 15;
+		}
+		if (bodyA == ball && bodyB == topBounce || bodyA == topBounce && bodyB == ball)
+		{
+			App->audio->PlayFx(topbouncefx);
 		}
 	}
 	

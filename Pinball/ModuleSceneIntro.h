@@ -28,8 +28,12 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* table;
+
 	uint bonus_fx;
 	uint bluefx;
+	uint combofx;
+	uint topbouncefx;
+	uint tpfx;
 
 	PhysBody* ball;
 	PhysBody* circlepoint;
@@ -78,6 +82,7 @@ public:
 	bool collision7 = false;
 	bool collision8 = false;
 	bool collision9 = false;
+	bool collision10 = false;
 	bool jointed = false;
 	bool tp = false;
 	bool tp2 = false;
