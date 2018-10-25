@@ -36,6 +36,7 @@ bool ModuleInitScene::Start()
 	combofx = App->audio->LoadFx("pinball/combodone.wav");
 	topbouncefx = App->audio->LoadFx("pinball/topbouncefx.wav");
 	tpfx = App->audio->LoadFx("pinball/tpfx.wav");
+	bigbouncefx = App->audio->LoadFx("pinball/bigbouncefx.wav");
 	table = App->textures->Load("pinball/Texturas2.png");
 	score = App->fonts->Load("pinball/numbers.png","0123456789", 1);
 	App->audio->PlayMusic("pinball/song.ogg");
@@ -616,6 +617,7 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		{
 			collision9 = !collision9;
 			App->audio->PlayFx(bonus_fx);
+			
 			if (collision9 == true)
 			{
 				combo2++;
@@ -629,6 +631,14 @@ void ModuleInitScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (bodyA == ball && bodyB == topBounce || bodyA == topBounce && bodyB == ball)
 		{
 			App->audio->PlayFx(topbouncefx);
+		}
+		if (bodyA == ball && bodyB == leftBounce || bodyA == leftBounce && bodyB == ball)
+		{
+			App->audio->PlayFx(bigbouncefx);
+		}
+		if (bodyA == ball && bodyB == rightBounce || bodyA == rightBounce && bodyB == ball)
+		{
+			App->audio->PlayFx(bigbouncefx);
 		}
 	}
 	

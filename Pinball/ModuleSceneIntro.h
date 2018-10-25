@@ -34,6 +34,7 @@ public:
 	uint combofx;
 	uint topbouncefx;
 	uint tpfx;
+	uint bigbouncefx;
 
 	PhysBody* ball;
 	PhysBody* circlepoint;
